@@ -24,6 +24,7 @@ services:
             DB_USER: $$cap_db_user
             DB_PASS: $$cap_db_pass
             DB_NAME: $$cap_db_name
+            DOCUMENT_ROOT: /var/www/html
 caproverOneClickApp:
     variables:
         - id: $$cap_db_name
