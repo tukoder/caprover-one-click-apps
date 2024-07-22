@@ -60,7 +60,7 @@ caproverOneClickApp:
           TODO1
         end: >
           TODO@
-    displayName: Drupal
+    displayName: Drupal v2
     isOfficial: false
     description: TODO3
     documentation: TODO4
