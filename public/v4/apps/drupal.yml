@@ -1,0 +1,65 @@
+captainVersion: 4
+services:
+    $$cap_appname-db:
+        image: $$cap_db_type:$$cap_database_version
+        volumes:
+            - $$cap_appname-db-data:/var/lib/mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: $$cap_db_pass
+            MYSQL_DATABASE: $$cap_db_name
+            MYSQL_USER: $$cap_db_user
+            MYSQL_PASSWORD: $$cap_db_pass
+        caproverExtra:
+            notExposeAsWebApp: 'true'
+    $$cap_appname-app:
+        depends_on:
+            - $$cap_appname-db
+        image: droptica/php-apache:$$cap_web_wersion
+        volumes:
+            - $$cap_appname-drupal-data:/var/www/html
+        restart: always
+        environment:
+            DB_HOST: srv-captain--$$cap_appname-db:3306
+            DB_USER: $$cap_db_user
+            DB_PASS: $$cap_db_pass
+            DB_NAME: $$cap_db_name
+caproverOneClickApp:
+    variables:
+        - id: $$cap_db_name
+          label: Database Name
+          defaultValue: drupal
+          validRegex: /^([a-zA-Z0-9])+$/
+        - id: $$cap_db_user
+          label: Database user
+          defaultValue: wordpressuser
+          validRegex: /^([a-zA-Z0-9])+$/
+        - id: $$cap_db_pass
+          label: Database password
+          description: ''
+          validRegex: /^(\w|[^\s"'\\])+$/
+          defaultValue: $$cap_gen_random_hex(16)
+        - id: $$cap_web_wersion
+          label: WEB image Version
+          defaultValue: '8.3'
+          description: TODO
+          validRegex: /^([^\s^\/])+$/
+        - id: $$cap_db_type
+          label: Database Type
+          defaultValue: mysql
+          description: You can either choose mariadb or mysql, you need to change the version according to which DB is selected. It is case sensitive.
+          validRegex: /^(mysql|mariadb)$/
+        - id: $$cap_database_version
+          label: Database Version, default is MySQL
+          defaultValue: '8.0.29'
+          description: Check out the Docker pages for the valid tags https://hub.docker.com/r/library/mysql/tags/ or https://hub.docker.com/_/mariadb?tab=tags
+          validRegex: /^([^\s^\/])+$/
+    instructions:
+        start: >-
+          TODO1
+        end: >
+          TODO@
+    displayName: Drupal
+    isOfficial: false
+    description: TODO3
+    documentation: TODO4

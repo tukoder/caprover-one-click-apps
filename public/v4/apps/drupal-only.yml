@@ -1,0 +1,48 @@
+captainVersion: 4
+services:
+
+  $$cap_appname-app:
+    depends_on:
+      - $$cap_appname-db
+    image: droptica/php-apache:$$cap_web_wersion
+    volumes:
+      - $$cap_appname-drupal-data:/var/www/html
+    restart: always
+    environment:
+      DB_HOST: $$cap_db_host:3306
+      DB_USER: $$cap_db_user
+      DB_PASS: $$cap_db_pass
+      DB_NAME: $$cap_db_name
+caproverOneClickApp:
+    variables:
+        - description: Database host
+          defaultValue: srv-captain--xxx
+          id: $$cap_db_host
+          label: Database Host
+        - id: $$cap_db_name
+          label: Database Name
+          defaultValue: drupal
+          validRegex: /^([a-zA-Z0-9])+$/
+        - id: $$cap_db_user
+          label: Database user
+          defaultValue: wordpressuser
+          validRegex: /^([a-zA-Z0-9])+$/
+        - id: $$cap_db_pass
+          label: Database password
+          description: ''
+          validRegex: /^(\w|[^\s"'\\])+$/
+          defaultValue: $$cap_gen_random_hex(16)
+        - id: $$cap_web_wersion
+          label: WEB image Version
+          defaultValue: '8.3'
+          description: TODO
+          validRegex: /^([^\s^\/])+$/
+    instructions:
+        start: >-
+          TODO1
+        end: >-
+          TODO2
+    displayName: Drupal - No Database
+    isOfficial: false
+    description: TODO3
+    documentation: TODO4
