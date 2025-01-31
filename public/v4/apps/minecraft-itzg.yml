@@ -102,7 +102,7 @@ caproverOneClickApp:
     instructions:
         start: Minecraft server with dynamic server types and modpack support. This is oneclickapp in the any of itzg's Minecraft server version.
         end: Minecraft is deployed and available as srv-captain--$$cap_appname. Note that the application may take up to ten minutes to become available.
-    displayName: Dynamic Minecraft itzg server
+    displayName: Minecraft itzg server custom
     isOfficial: false
     description: Minecraft server with dynamic versions and types.
     documentation: https://github.com/itzg/docker-minecraft-server
